@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -20,6 +20,22 @@ function SettingsScreen() {
   );
 }
 
+function GlobalScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Global!</Text>
+    </View>
+  );
+}
+
+function LocalScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Local!</Text>
+    </View>
+  );
+}
+
 const Tab = createBottomTabNavigator();
 
 export default function App() {
@@ -34,8 +50,12 @@ export default function App() {
               iconName = focused
                 ? 'home'
                 : 'home-outline';
+            } else if (route.name === 'Global') {
+              iconName = focused ? 'globe' : 'globe-outline';
+            } else if (route.name === 'Local') {
+              iconName = focused ? 'american-football' : 'american-football-outline';
             } else if (route.name === 'Settings') {
-              iconName = focused ? 'settings' : 'settings-outline';
+              iconName = focused ? 'document-text' : 'document-text-outline';
             }
 
             // You can return any component that you like here!
@@ -45,30 +65,67 @@ export default function App() {
           tabBarInactiveTintColor: 'gray',
         })}
       >
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
+        <Tab.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            title: 'Covid-19 Tracker',
+            tabBarLabel: 'Home',
+            headerStyle: {
+              backgroundColor: '#00BFA6',
+            },
+            headerTintColor: '#fff',
+            headerRight: () => (
+              <MaterialIcons name="logout" size={24} color="#fff" />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Global"
+          component={GlobalScreen}
+          options={{
+            title: 'Covid-19 Tracker',
+            tabBarLabel: 'Global',
+            headerStyle: {
+              backgroundColor: '#00BFA6',
+            },
+            headerTintColor: '#fff',
+            headerRight: () => (
+              <MaterialIcons name="logout" size={24} color="#fff" />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Local"
+          component={LocalScreen}
+          options={{
+            title: 'Covid-19 Tracker',
+            tabBarLabel: 'Local',
+            headerStyle: {
+              backgroundColor: '#00BFA6',
+            },
+            headerTintColor: '#fff',
+            headerRight: () => (
+              <MaterialIcons name="logout" size={24} color="#fff" />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Settings"
+          component={SettingsScreen}
+          options={{
+            title: 'Covid-19 Tracker',
+            tabBarLabel: 'Testing',
+            headerStyle: {
+              backgroundColor: '#00BFA6',
+            },
+            headerTintColor: '#fff',
+            headerRight: () => (
+              <MaterialIcons name="logout" size={24} color="#fff" />
+            ),
+          }}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );
 }
-
-
-// function App() {
-//   return (
-//     <NavigationContainer>
-//       <Stack.Navigator>
-//         <Stack.Screen
-//           name="Home"
-//           component={HomeScreen}
-//           options={{
-//             title: 'My home',
-//             headerStyle: {
-//               backgroundColor: '#f4511e',
-//             },
-//             headerTintColor: '#fff',
-//           }}
-//         />
-//       </Stack.Navigator>
-//     </NavigationContainer>
-//   );
-// }
