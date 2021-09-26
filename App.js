@@ -7,23 +7,11 @@ import HomeScreen from './pages/Home';
 import SettingsScreen from './pages/Test';
 import GlobalScreen from './pages/Global';
 import LocalScreen from './pages/Local';
-import axios from './api/Api';
+
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
-
-  const [dailyDeath, setDailyDeath] = React.useState();
-
-  React.useEffect(() => {
-    axios.get().then((responce) => {
-      setDailyDeath(responce.data);
-      console.log(responce.data["data"]["local_new_cases"]);
-    }).catch((error) => {
-      console.log(error.error);
-    });
-  }, []);
-
 
   return (
     <NavigationContainer>
