@@ -6,13 +6,3 @@ export async function fetchData() {
     }).get();
     return res.data.data;
 }
-// export async function fetchTotalFacilityList(branchId) {
-//     const configs = {
-//       headers: {
-//         Authorization: window.localStorage.getItem('loginToken'),
-//       }
-//     }
-  
-//     const res = await axios.get(`${baseURL}/b4u-core/facility/search?branchId=${branchId}&size=${1000}`, configs)
-//     return res
-//   }
