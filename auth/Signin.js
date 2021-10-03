@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/core'
 import React, { useEffect, useState } from 'react'
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native'
 import { auth } from '../firebase';
 
 const Signin = () => {
@@ -37,14 +37,17 @@ const Signin = () => {
             style={styles.container}
             behavior="padding"
         >
-            <Text>Sign in : Login</Text>
+            <Image source={require('../assets/icon.png')} style={{ width: 220, height: 200, resizeMode: "contain" }} />
+            <Text style={{ fontSize: 40, fontWeight: "bold", textAlign: "center", marginBottom: 30, }}>Login Now</Text>
             <View style={styles.inputContainer}>
+                <Text style={{ padding: 5 }}>Enter Your Email</Text>
                 <TextInput
                     placeholder="Email"
                     value={email}
                     onChangeText={text => setEmail(text)}
                     style={styles.input}
                 />
+                <Text style={{ paddingBottom: 5, paddingTop: 20 }}>Enter Your Password</Text>
                 <TextInput
                     placeholder="Password"
                     value={password}
@@ -61,12 +64,7 @@ const Signin = () => {
                 >
                     <Text style={styles.buttonText}>Login</Text>
                 </TouchableOpacity>
-                <TouchableOpacity
-                    onPress={handleSignUp}
-                    style={[styles.button, styles.buttonOutline]}
-                >
-                    <Text style={styles.buttonOutlineText}>Register</Text>
-                </TouchableOpacity>
+                <Text style={{ fontSize: 17, paddingTop: 10 }}>Don't have a account? <Text style={{ color: "#00BFA6" }} onPress={handleSignUp}>Register</Text></Text>
             </View>
         </KeyboardAvoidingView>
     );
@@ -84,38 +82,28 @@ const styles = StyleSheet.create({
         width: '80%'
     },
     input: {
-        backgroundColor: 'white',
+        backgroundColor: '#D4F5E9',
         paddingHorizontal: 15,
         paddingVertical: 10,
         borderRadius: 10,
         marginTop: 5,
     },
     buttonContainer: {
-        width: '60%',
         justifyContent: 'center',
         alignItems: 'center',
+        width: "100%",
+        paddingHorizontal: 40,
         marginTop: 40,
     },
     button: {
         backgroundColor: '#00BFA6',
-        width: '100%',
+        width: "100%",
         padding: 15,
-        borderRadius: 10,
+        borderRadius: 40,
         alignItems: 'center',
-    },
-    buttonOutline: {
-        backgroundColor: 'white',
-        marginTop: 5,
-        borderColor: '#00BFA6',
-        borderWidth: 2,
     },
     buttonText: {
         color: 'white',
-        fontWeight: '700',
-        fontSize: 16,
-    },
-    buttonOutlineText: {
-        color: '#00BFA6',
         fontWeight: '700',
         fontSize: 16,
     },
