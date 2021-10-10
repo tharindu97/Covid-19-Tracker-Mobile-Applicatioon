@@ -1,14 +1,13 @@
 import * as React from 'react';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/core'
 import { auth } from '../firebase'
 import HomeScreen from './Home';
 import SettingsScreen from './Test';
 import GlobalScreen from './Global';
 import LocalScreen from './/Local';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, Alert } from 'react-native';
 
 
 const Tab = createBottomTabNavigator();
@@ -24,6 +23,24 @@ const Navigation = () => {
             })
             .catch(error => alert(error.message))
     }
+
+
+    const createTwoButtonAlert = () => {
+        Alert.alert(
+            "Exit",
+            "Are you want to exit",
+            [
+                {
+                    text: "Cancel",
+                    onPress: () => console.log("Cancel Pressed"),
+                    style: "cancel"
+                },
+                { text: "OK", onPress: handleSignOut }
+            ],
+            { cancelable: false }
+        );
+    }
+
     return (
         <Tab.Navigator
             screenOptions={({ route }) => ({
@@ -61,7 +78,7 @@ const Navigation = () => {
                     headerTintColor: '#fff',
                     headerRight: () => (
                         <TouchableOpacity
-                            onPress={handleSignOut}
+                            onPress={createTwoButtonAlert}
                         >
                             <MaterialIcons name="logout" size={24} color="#fff" />
                         </TouchableOpacity>
@@ -80,7 +97,7 @@ const Navigation = () => {
                     headerTintColor: '#fff',
                     headerRight: () => (
                         <TouchableOpacity
-                            onPress={handleSignOut}
+                            onPress={createTwoButtonAlert}
                         >
                             <MaterialIcons name="logout" size={24} color="#fff" />
                         </TouchableOpacity>
@@ -99,7 +116,7 @@ const Navigation = () => {
                     headerTintColor: '#fff',
                     headerRight: () => (
                         <TouchableOpacity
-                            onPress={handleSignOut}
+                            onPress={createTwoButtonAlert}
                         >
                             <MaterialIcons name="logout" size={24} color="#fff" />
                         </TouchableOpacity>
@@ -118,7 +135,7 @@ const Navigation = () => {
                     headerTintColor: '#fff',
                     headerRight: () => (
                         <TouchableOpacity
-                            onPress={handleSignOut}
+                            onPress={createTwoButtonAlert}
                         >
                             <MaterialIcons name="logout" size={24} color="#fff" />
                         </TouchableOpacity>

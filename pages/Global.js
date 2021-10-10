@@ -1,14 +1,18 @@
 import React, { useRef } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator } from "react-native";
 import { fetchData } from '../api/Api';
 import { captureRef } from 'react-native-view-shot';
 import * as Sharing from 'expo-sharing';
 
 const Global = () => {
+    const [isLoding, setIsLoding] = React.useState(false);
     const [covidUpdate, setCovidUpdate] = React.useState({});
     const viewRef = useRef();
     React.useEffect(() => {
         load();
+        setTimeout(() => {
+            setIsLoding(true)
+        }, 1500);
     }, []);
 
     async function onShare() {
@@ -35,6 +39,14 @@ const Global = () => {
         global_new_deaths,
         global_recovered,
     } = covidUpdate;
+
+    if (!isLoding) {
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <ActivityIndicator size="large" color="#00BFA6" />
+            </View>
+        );
+    }
 
     return (
         <View style={{ backgroundColor: "white" }}>

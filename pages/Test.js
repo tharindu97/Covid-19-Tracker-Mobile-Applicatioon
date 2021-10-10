@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet, ScrollView, ActivityIndicator } from "react-native";
 import { fetchData } from '../api/Api';
 
 const Test = () => {
@@ -9,9 +9,10 @@ const Test = () => {
     const [covidUpdate, setCovidUpdate] = React.useState({});
 
     React.useEffect(() => {
-        load().then(
+        load();
+        setTimeout(() => {
             setIsLoding(true)
-        );
+        }, 1500);
     }, []);
 
     async function load() {
@@ -29,8 +30,8 @@ const Test = () => {
 
     if (!isLoding) {
         return (
-            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                <Text>Loding.....!</Text>
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <ActivityIndicator size="large" color="#00BFA6" />
             </View>
         );
     }

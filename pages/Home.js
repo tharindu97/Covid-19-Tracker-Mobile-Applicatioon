@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator } from "react-native";
 import { fetchData } from '../api/Api';
 import { captureRef } from 'react-native-view-shot';
 import * as Sharing from 'expo-sharing';
@@ -9,9 +9,10 @@ const Home = () => {
     const [covidUpdate, setCovidUpdate] = React.useState({});
     const viewRef = useRef();
     React.useEffect(() => {
-        load().then(
+        load();
+        setTimeout(() => {
             setIsLoding(true)
-        );
+        }, 1500);
     }, []);
 
     async function onShare() {
@@ -45,8 +46,8 @@ const Home = () => {
 
     if (!isLoding) {
         return (
-            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                <Text>Loding.....!</Text>
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <ActivityIndicator size="large" color="#00BFA6" />
             </View>
         );
     }
