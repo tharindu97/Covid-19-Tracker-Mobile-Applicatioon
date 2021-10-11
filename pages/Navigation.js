@@ -3,10 +3,10 @@ import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useNavigation } from '@react-navigation/core'
 import { auth } from '../firebase'
-import HomeScreen from './Home';
-import SettingsScreen from './Test';
-import GlobalScreen from './Global';
-import LocalScreen from './/Local';
+import HomeScreen from './screens/Home';
+import SettingsScreen from './screens/Test';
+import GlobalScreen from './screens/Global';
+import LocalScreen from './screens/Local';
 import { TouchableOpacity, Alert } from 'react-native';
 
 

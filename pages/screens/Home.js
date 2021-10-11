@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator } from "react-native";
-import { fetchData } from '../api/Api';
+import { fetchData } from '../../api/Api';
 import { captureRef } from 'react-native-view-shot';
 import * as Sharing from 'expo-sharing';
 

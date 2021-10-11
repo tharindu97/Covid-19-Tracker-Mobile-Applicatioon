@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, ActivityIndicator } from "react-native";
-import { fetchData } from '../api/Api';
+import { fetchData } from '../../api/Api';
 
 const Test = () => {
     const [isLoding, setIsLoding] = React.useState(false);
