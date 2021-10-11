@@ -1,12 +1,16 @@
 import React, { useRef } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator, Alert } from "react-native";
 import { fetchData } from '../../api/Api';
 import { captureRef } from 'react-native-view-shot';
 import * as Sharing from 'expo-sharing';
+import * as MediaLibrary from 'expo-media-library';
+import * as Location from 'expo-location';
 
 const Home = () => {
+
     const [isLoding, setIsLoding] = React.useState(false);
     const [covidUpdate, setCovidUpdate] = React.useState({});
+
     const viewRef = useRef();
     React.useEffect(() => {
         load();
@@ -14,6 +18,8 @@ const Home = () => {
             setIsLoding(true)
         }, 1500);
     }, []);
+
+
 
     async function onShare() {
         try {
@@ -26,6 +32,38 @@ const Home = () => {
             alert(error.message);
         }
     };
+
+    async function imageDownload() {
+        try {
+            await captureRef(viewRef, {
+                quality: 0.7,
+                format: 'png',
+            }).then(async (value) => {
+                const { status } = await Location.requestForegroundPermissionsAsync();
+                if (status !== 'granted') {
+                    Alert.alert(
+                        "Permission",
+                        "invalied your permission",
+                        [
+                            { text: "OK", onPress: () => console.log("save done") }
+                        ],
+                        { cancelable: false }
+                    );
+                }
+                MediaLibrary.saveToLibraryAsync(value);
+                Alert.alert(
+                    "Save report",
+                    "report save succefuly",
+                    [
+                        { text: "OK", onPress: () => console.log("save done") }
+                    ],
+                    { cancelable: false }
+                );
+            });
+        } catch (error) {
+            alert(error.message);
+        }
+    }
 
     async function load() {
         const data = await fetchData();
@@ -115,7 +153,9 @@ const Home = () => {
                         </View>
 
                         <View style={styles.button}>
-                            <Text style={[styles.title, { color: "#00BFA6" }]}>DOWNLOAD</Text>
+                            <TouchableOpacity onPress={imageDownload}>
+                                <Text style={[styles.title, { color: "#00BFA6" }]}>DOWNLOAD</Text>
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </View>
